@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1120" viewBox="0 0 1800 1120">
+  <defs>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#1479a6"/></marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#27814c"/></marker>
+    <marker id="arrowGray" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#68758a"/></marker>
+    <style>
+      .title { font: 700 38px 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif; fill:#10243a }
+      .subtitle { font: 20px 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif; fill:#43576d }
+      .lane { font: 700 23px 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif }
+      .head { font: 700 19px 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif; fill:#14283b }
+      .body { font: 16px 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif; fill:#405267 }
+      .small { font: 14px 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif; fill:#53657a }
+      .white { fill:#fff }
+      .box { fill:#fff; stroke:#9aacc0; stroke-width:1.5; rx:12 }
+      .dataBox { fill:#fff; stroke:#57a7ca; stroke-width:1.5; rx:12 }
+      .semBox { fill:#fff; stroke:#66ad80; stroke-width:1.5; rx:12 }
+      .modelBox { fill:#fff; stroke:#777bc4; stroke-width:1.5; rx:12 }
+      .trainBox { fill:#fff; stroke:#d69b42; stroke-width:1.5; rx:12 }
+      .solid { fill:none; stroke:#1479a6; stroke-width:2.5; marker-end:url(#arrowBlue) }
+      .green { fill:none; stroke:#27814c; stroke-width:2.5; marker-end:url(#arrowGreen) }
+      .dash { fill:none; stroke:#68758a; stroke-width:2; stroke-dasharray:8 7; marker-end:url(#arrowGray) }
+    </style>
+  </defs>
+  <rect width="1800" height="1120" fill="#f6f8fb"/>
+  <text x="54" y="58" class="title">Wheat-KGCA 小麦生育期识别总体框架</text>
+  <text x="56" y="94" class="subtitle">统一农学标签复核 · VLM 结构化证据 · ConvNeXtV2-Tiny + RCA · 保守门控语义残差</text>
+
+  <!-- Data lane -->
+  <rect x="42" y="122" width="1716" height="208" rx="18" fill="#e9f5fb" stroke="#78bfdd" stroke-width="1.5"/>
+  <text x="66" y="158" class="lane" fill="#126589">A. 数据与专家规则层</text>
+  <rect x="74" y="183" width="300" height="106" class="dataBox"/>
+  <text x="94" y="217" class="head">田间 RGB 图像</text>
+  <text x="94" y="246" class="body">潍坊 / 正定 · 8 类生育期</text>
+  <text x="94" y="270" class="small">全量 24,847 张（按当前路线图）</text>
+  <rect x="432" y="183" width="315" height="106" class="dataBox"/>
+  <text x="452" y="217" class="head">统一专家规则</text>
+  <text x="452" y="246" class="body">阶段判据 · 边界判据 · 不确定规则</text>
+  <text x="452" y="270" class="small">旗叶、穗部、花药、籽粒与植株状态</text>
+  <rect x="805" y="183" width="315" height="106" class="dataBox"/>
+  <text x="825" y="217" class="head">全量标签一致性复核</text>
+  <text x="825" y="246" class="body">keep / relabel / uncertain</text>
+  <text x="825" y="270" class="small">按复核结果生成统一标签</text>
+  <rect x="1178" y="183" width="310" height="106" class="dataBox"/>
+  <text x="1198" y="217" class="head">数据集划分</text>
+  <text x="1198" y="246" class="body">train / val / test</text>
+  <text x="1198" y="270" class="small">先复核，再按正式方案划分</text>
+  <rect x="1546" y="183" width="180" height="106" class="dataBox"/>
+  <text x="1566" y="217" class="head">评价设置</text>
+  <text x="1566" y="246" class="body">整体 / 边界</text>
+  <text x="1566" y="270" class="small">低置信样本</text>
+  <path d="M374 236 H424" class="solid"/><path d="M747 236 H797" class="solid"/><path d="M1120 236 H1170" class="solid"/><path d="M1488 236 H1538" class="solid"/>
+
+  <!-- Semantic lane -->
+  <rect x="42" y="352" width="1716" height="200" rx="18" fill="#edf8f0" stroke="#80c292" stroke-width="1.5"/>
+  <text x="66" y="388" class="lane" fill="#287444">B. 结构化 VLM 专家语义层（离线证据生成，不作最终分类器）</text>
+  <rect x="90" y="414" width="320" height="100" class="semBox"/>
+  <text x="110" y="447" class="head">P11 边界感知 Prompt</text>
+  <text x="110" y="477" class="body">依据统一规则观察可见器官证据</text>
+  <rect x="500" y="414" width="390" height="100" class="semBox"/>
+  <text x="520" y="447" class="head">VLM 结构化 JSON</text>
+  <text x="520" y="477" class="body">穗 / 花药 / 旗叶 / 籽粒 / 颜色 / 不确定性</text>
+  <rect x="980" y="414" width="310" height="100" class="semBox"/>
+  <text x="1000" y="447" class="head">语义向量化</text>
+  <text x="1000" y="477" class="body">连续证据 + 类别字段编码 → z</text>
+  <rect x="1380" y="414" width="310" height="100" class="semBox"/>
+  <text x="1400" y="447" class="head">图像 ID 对齐</text>
+  <text x="1400" y="477" class="body">与视觉特征 / 标签对应</text>
+  <path d="M410 464 H492" class="green"/><path d="M890 464 H972" class="green"/><path d="M1290 464 H1372" class="green"/>
+
+  <!-- Model lane -->
+  <rect x="42" y="574" width="1716" height="291" rx="18" fill="#f0f0fc" stroke="#9698d4" stroke-width="1.5"/>
+  <text x="66" y="610" class="lane" fill="#4d4aa2">C. ConvNeXtV2-Tiny + RCA 视觉-语义识别模型</text>
+  <rect x="72" y="657" width="210" height="112" class="modelBox"/>
+  <text x="92" y="692" class="head">输入图像 x</text>
+  <text x="92" y="723" class="body">统一预处理</text>
+  <rect x="330" y="657" width="260" height="112" class="modelBox"/>
+  <text x="350" y="692" class="head">ConvNeXtV2-Tiny</text>
+  <text x="350" y="723" class="body">多层级视觉特征提取</text>
+  <rect x="638" y="657" width="260" height="112" class="modelBox"/>
+  <text x="658" y="692" class="head">RCA 残差坐标注意力</text>
+  <text x="658" y="723" class="body">强化方向与位置表征</text>
+  <rect x="946" y="657" width="260" height="112" class="modelBox"/>
+  <text x="966" y="692" class="head">池化与视觉分类头</text>
+  <text x="966" y="723" class="body">视觉特征 Fv / logits lv</text>
+  <rect x="1254" y="646" width="268" height="136" class="modelBox"/>
+  <text x="1274" y="680" class="head">保守门控语义残差</text>
+  <text x="1274" y="710" class="body">FiLM 轻量调制 + gate</text>
+  <text x="1274" y="738" class="small">低置信/小间隔时允许修正</text>
+  <rect x="1570" y="657" width="158" height="112" class="modelBox"/>
+  <text x="1588" y="692" class="head">8 类输出</text>
+  <text x="1588" y="723" class="body">类别 + 置信度</text>
+  <path d="M282 713 H322" class="solid"/><path d="M590 713 H630" class="solid"/><path d="M898 713 H938" class="solid"/><path d="M1206 713 H1246" class="solid"/><path d="M1522 713 H1562" class="solid"/>
+  <path d="M1540 514 C1540 580 1380 588 1380 638" class="green"/>
+  <text x="1390" y="574" class="small" fill="#287444">结构化语义 z</text>
+  <rect x="350" y="797" width="1170" height="42" rx="10" fill="#fff" stroke="#b5b8dc"/>
+  <text x="375" y="824" class="body">fused_logits = visual_logits + effective_gate × delta_logits　｜　统一模型完成 8 类预测</text>
+
+  <!-- Training lane -->
+  <rect x="42" y="887" width="1716" height="185" rx="18" fill="#fff7e8" stroke="#e5b657" stroke-width="1.5"/>
+  <text x="66" y="923" class="lane" fill="#985414">D. 训练监督与推理阶段</text>
+  <rect x="78" y="947" width="425" height="91" class="trainBox"/>
+  <text x="98" y="980" class="head">基础融合训练目标</text>
+  <text x="98" y="1008" class="body">分类 + 视觉辅助 + 门控/锚定/残差约束</text>
+  <rect x="570" y="947" width="425" height="91" class="trainBox"/>
+  <text x="590" y="980" class="head">可选训练期知识约束</text>
+  <text x="590" y="1008" class="body">CAM 空间对齐 / 相邻阶段辅助头（按实验）</text>
+  <rect x="1060" y="947" width="630" height="91" class="trainBox"/>
+  <text x="1080" y="980" class="head">推理</text>
+  <text x="1080" y="1008" class="body">图像 + 对齐语义证据 → 门控融合 → 单一 8 类类别与置信度</text>
+  <path d="M503 993 H562" class="dash"/><path d="M995 993 H1052" class="dash"/>
+  <text x="78" y="1060" class="small">虚线表示训练配置间的监督关系；CAM 与相邻阶段辅助头不是额外的推理分类器。</text>
+</svg>

@@ -1,0 +1,39 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Large generated outputs
+outputs/
+checkpoints/*.pth
+checkpoints/*.pt
+checkpoints/*.ckpt
+*.pth
+*.pt
+*.ckpt
+
+# Local datasets and raw images
+data/images/
+data/raw/
+data/data_split_811_full/
+
+# API outputs and local credentials
+*.env
+.env
+secrets.*
+api_keys.*
+
+# Logs
+*.log
+runs/
+wandb/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

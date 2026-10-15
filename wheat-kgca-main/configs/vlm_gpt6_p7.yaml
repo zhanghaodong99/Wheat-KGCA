@@ -1,0 +1,12 @@
+experiment: vlm_structured_output
+model: gpt-6
+provider: openai
+prompt_id: P7
+manifest: experiments/01_vlm_structured_output/manifests/vlm_model_test_balanced_800.csv
+prompt_file: experiments/01_vlm_structured_output/prompts/P7_dataset_aligned_flowering.txt
+output_dir: outputs/vlm_comparison/model_comparison
+openai_api_mode: responses
+openai_image_detail: high
+reasoning_effort: low
+temperature: 0.0
+

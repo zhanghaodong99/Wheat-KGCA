@@ -1,0 +1,9 @@
+experiment: final_ablation
+status: placeholder
+components:
+  - visual_baseline
+  - structured_vlm_evidence
+  - semantic_visual_fusion
+  - cam_alignment
+  - adjacent_stage_supervision
+

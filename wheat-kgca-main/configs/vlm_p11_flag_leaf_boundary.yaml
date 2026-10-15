@@ -1,0 +1,6 @@
+experiment: vlm_structured_output
+prompt_id: P11
+manifest: experiments/01_vlm_structured_output/manifests/vlm_model_test_balanced_800.csv
+prompt_file: experiments/01_vlm_structured_output/prompts/P11_flag_leaf_boundary_strict.txt
+output_dir: outputs/vlm_comparison
+temperature: 0.0

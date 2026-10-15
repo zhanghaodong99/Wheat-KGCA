@@ -1,0 +1,35 @@
+experiment: visual_backbone_comparison
+task: eight_class_wheat_growth_stage_classification
+
+data:
+  split_root: data/data_split_811_full
+  manifest: data/data_split_811_full/wheat_split_811_manifest.csv
+  classes:
+    - seedling
+    - tillering
+    - stem_elongation
+    - flag_leaf_booting
+    - heading
+    - flowering
+    - grain_filling
+    - maturity
+
+training:
+  epochs: 30
+  num_workers: 4
+  pretrained: true
+  amp: true
+  noise_evaluation: true
+
+models:
+  - convnextv2_tiny
+  - inception_next_tiny
+  - maxvit_tiny_rw_224
+  - mobilenetv4_hybrid_m
+  - repvit_tiny
+  - resnet50
+  - swinv2_tiny_window16_256
+
+outputs:
+  training_root: outputs/src_model_training
+  summary_root: _analysis_outputs/visual_model_supplementary_analysis

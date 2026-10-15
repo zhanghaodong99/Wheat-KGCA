@@ -1,0 +1,7 @@
+experiment: semantic_visual_fusion
+status: placeholder
+visual_backbone: convnextv2_tiny
+num_classes: 8
+semantic_source: structured_vlm_json
+note: Add final fusion configuration after the final revised-data experiment is confirmed.
+

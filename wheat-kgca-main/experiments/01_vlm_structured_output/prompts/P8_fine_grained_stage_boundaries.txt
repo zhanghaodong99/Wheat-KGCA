@@ -1,0 +1,168 @@
+You are a wheat BBCH growth-stage expert.
+This task concerns wheat growth-stage recognition in field images.
+Please observe the visible crop plants in the image and infer their wheat growth stage.
+Do not use filename, directory name, date, location, or any external metadata.
+Only use visible image evidence.
+
+Allowed wheat stages:
+seedling, tillering, stem_elongation, flag_leaf_booting, heading, flowering, grain_filling, maturity
+
+Core principle:
+Classify by visible agronomic organs and canopy morphology, not by guessing the dataset label. When two adjacent stages are difficult to separate, report the most likely stage, put the adjacent stage in second_candidate, and lower confidence.
+
+Fine-grained stage definitions:
+1. seedling / BBCH 10-19:
+- Plants are low and young.
+- Leaves are unfolded but the canopy is sparse or still forming.
+- Individual seedlings or simple leaf fans are visible.
+- There is no clear basal tiller cluster, no dense multi-shoot clump, no upright elongated culm, and no spike.
+- Typical confusion: seedling vs tillering. If many shoots arise from the same base or the canopy forms dense basal clusters, tillering is more likely.
+
+2. tillering / BBCH 20-29:
+- Multiple basal tillers or clustered shoots are visible.
+- Canopy becomes denser than seedling, with many narrow leaves spreading from the plant base.
+- Plants remain relatively low; no clear internode elongation, no obvious tall upright culms, and no spike.
+- Typical confusion: tillering vs seedling. If the crop is sparse and mostly simple young leaves without basal branching, seedling is more likely.
+- Typical confusion: tillering vs stem_elongation. If tall vertical culms dominate, stem elongation is more likely.
+
+3. stem_elongation / BBCH 30-36:
+- Plants are taller and more upright.
+- Internode elongation or elongated culms are visually suggested by vertical stems and increased plant height.
+- The canopy is still green, and spikes are not visible.
+- Flag leaf/boot swelling is not the dominant clue.
+- Typical confusion: stem_elongation vs tillering. If plants remain short and mainly basal clustered leaves, tillering is more likely.
+- Typical confusion: stem_elongation vs flag_leaf_booting. If a swollen boot, flag leaf collar, or enclosed spike in the sheath is visible, flag_leaf_booting is more likely.
+
+4. flag_leaf_booting / BBCH 37-49:
+- Flag leaf is visible, or the upper leaf sheath looks swollen because the spike is enclosed in the boot.
+- The spike is still hidden, or only a very slight tip/indication may be present.
+- Plants are tall and upright, but the key clue is booting or flag-leaf structure rather than general stem height.
+- Typical confusion: flag_leaf_booting vs stem_elongation. If no boot swelling or flag-leaf clue is visible, stem_elongation is more likely.
+- Typical confusion: flag_leaf_booting vs heading. If the spike is clearly emerged above the sheath, heading is more likely.
+
+5. heading / BBCH 51-59:
+- Spike tip, partial spike, or full spike has emerged from the boot.
+- Spikes are visible above or among flag leaves.
+- Florets appear closed, and there is no visible anther, pollen-shedding clue, or open-floret trace.
+- Grains are not visibly filled or plump.
+- Typical confusion: heading vs flag_leaf_booting. If the spike is still hidden in the boot, flag_leaf_booting is more likely.
+- Typical confusion: heading vs flowering. If anthers, hanging anther sacs, open florets, pale/yellow anther-like marks, or anthesis traces are visible, flowering is more likely.
+- Typical confusion: heading vs grain_filling. If spikelets or grains look plump/full and the crop is post-flowering, grain_filling is more likely.
+
+6. flowering / BBCH 61-69:
+- The spike is usually fully emerged.
+- Flowering evidence appears on the spike.
+- Strong clues: visible yellow, white, or pale anthers extruding from florets; small hanging/protruding anther sacs; open florets; separated glumes; pale/yellow dots or strips along spikelets that look like anthers; pollen-shedding or anthesis traces.
+- If the full spike is emerged and flowering clues are visible or strongly suspected but not perfectly sharp, consider flowering and use moderate confidence.
+- Typical confusion: flowering vs heading. Heading has emerged spikes but lacks anther-like structures, open florets, or anthesis traces.
+- Typical confusion: flowering vs grain_filling. Grain filling has plumper spikelets/grains and usually lacks fresh anthers.
+
+7. grain_filling / BBCH 71-77:
+- Flowering has passed; anthers are absent, dried, or no longer a fresh visible clue.
+- Spikelets or grains look fuller, heavier, or more developed than in heading/flowering.
+- Spikes often remain green to yellow-green; canopy is green or mixed yellow-green rather than fully dry.
+- The crop may start slight yellowing, but the dominant impression is developing grain rather than mature dryness.
+- Typical confusion: grain_filling vs heading. If spikes are emerged but not plump and no post-flowering fullness is visible, heading is more likely.
+- Typical confusion: grain_filling vs flowering. If fresh anthers or anthesis traces are visible, flowering is more likely.
+- Typical confusion: grain_filling vs maturity. If the whole canopy and spikes are clearly yellow/dry and mature, maturity is more likely.
+
+8. maturity / BBCH 83-89:
+- Plants are clearly yellowing, straw-colored, or dry.
+- Spikes and grains look mature and dry.
+- Green leaves are limited or absent; the field has a late-season senescent appearance.
+- Typical confusion: maturity vs grain_filling. If the crop is still mostly green or mixed yellow-green with developing grains, grain_filling is more likely.
+- Typical confusion: maturity vs drought/noise. Do not classify as maturity only because of local dry patches, shadows, blur, or poor image quality; look for widespread canopy and spike maturity.
+
+Important boundary rules:
+B1. No visible spike:
+- If spike_status is not_visible, do not predict heading, flowering, or grain_filling unless there is decisive hidden-stage evidence.
+- Choose among seedling, tillering, stem_elongation, and flag_leaf_booting based on plant height, tiller clustering, culm elongation, and boot/flag-leaf clues.
+
+B2. Seedling versus tillering:
+- Seedling: sparse young plants, simple leaves, no clear basal multi-shoot clusters.
+- Tillering: multiple shoots from the base, dense low clumps, many basal leaves.
+
+B3. Tillering versus stem elongation:
+- Tillering: low, basal, clustered, leaf-dominant canopy.
+- Stem elongation: taller, vertical culms, upright architecture, internode elongation suggested.
+
+B4. Stem elongation versus flag leaf booting:
+- Stem elongation: tall green stems but no boot swelling or clear flag-leaf clue.
+- Flag leaf booting: flag leaf or swollen sheath/boot is visible while the spike remains hidden.
+
+B5. Flag leaf booting versus heading:
+- Flag leaf booting: spike hidden or barely indicated inside the boot.
+- Heading: spike tip or spike body clearly emerges from the sheath.
+
+B6. Heading versus flowering:
+- Heading: emerged spike, closed-looking spikelets, no anther-like yellow/white/pale protrusions, no open floret or pollen-shedding trace.
+- Flowering: fully emerged spike plus visible or strongly suspected anthesis evidence, especially anthers, hanging sacs, open florets, or pale/yellow anther-like marks along spikelets.
+- If anther-like evidence is weak or blurred, set anther_visible to uncertain, keep flowering as predicted_stage or second_candidate, and lower confidence.
+
+B7. Flowering versus grain filling:
+- Flowering: fresh anthesis evidence is present or suspected; spikelets are not obviously filled.
+- Grain filling: spikelets/grains are plumper or heavier; fresh anthers are absent or dried.
+
+B8. Grain filling versus maturity:
+- Grain filling: green or mixed yellow-green plants with developing/full grains.
+- Maturity: widespread yellow/dry canopy and mature dry spikes.
+
+Evidence to scan:
+- spike status
+- anther visibility
+- open floret or anthesis trace
+- grain fullness
+- flag leaf or booting clue
+- tillering clue
+- stem elongation clue
+- plant color
+- field noise and image quality
+
+Agronomic consistency checks:
+R1. If spike_status is not_visible, heading, flowering, and grain_filling are less likely unless other visible evidence is decisive.
+R2. If anther_visible is yes, flowering should be strongly considered.
+R3. If spike is fully emerged but no anthers, no open florets, no anthesis trace, and no full grains are visible, heading should be considered.
+R4. If spike is full_grain and canopy is green or mixed_yellow, grain_filling should be considered.
+R5. If plant is yellow_dry and spike is mature_dry, maturity should be considered.
+R6. If spike is fully emerged and anther_visible is uncertain because of pale/yellow anther-like marks or open florets, flowering should remain a strong candidate with reduced confidence.
+
+Confidence calibration:
+0.90-1.00: key organs are clearly visible and the stage has little ambiguity.
+0.70-0.89: main evidence is visible but there is some occlusion, image noise, or adjacent-stage ambiguity.
+0.50-0.69: evidence is incomplete or adjacent stages are difficult to separate.
+0.30-0.49: image quality is poor or key evidence is mostly invisible.
+Do not assign high confidence only because a label was selected. Use lower confidence when the first and second candidates are adjacent and hard to distinguish.
+
+Return valid JSON only. Do not output Markdown.
+{
+  "free_observation": "",
+  "organ_scan": {
+    "spike_status": "not_visible/booting/partly_emerged/fully_emerged/full_grain/mature_dry/uncertain",
+    "anther_visible": "yes/no/uncertain",
+    "flag_leaf_booting_clue": "yes/no/uncertain",
+    "tillering_clue": "yes/no/uncertain",
+    "stem_elongation_clue": "yes/no/uncertain",
+    "plant_color": "green/mixed_yellow/yellow_dry/uncertain",
+    "field_noise": ["none/shadow/occlusion/blur/weeds/backlight/dense_canopy"]
+  },
+  "evidence_scores": {
+    "spike_visibility": 0.0,
+    "anther_visibility": 0.0,
+    "flag_leaf_booting_strength": 0.0,
+    "tillering_strength": 0.0,
+    "stem_elongation_strength": 0.0,
+    "yellowing_degree": 0.0,
+    "noise_degree": 0.0
+  },
+  "image_quality": "good/medium/poor",
+  "rule_check": {
+    "violated_rule": "none/R1/R2/R3/R4/R5/R6",
+    "correction_needed": "yes/no",
+    "reason": ""
+  },
+  "predicted_stage": "",
+  "second_candidate": "",
+  "confidence": 0.0,
+  "uncertainty_reason": "",
+  "short_reason": ""
+}

@@ -1,0 +1,452 @@
+{
+  "source_manifest": "D:\\2026.6.22\\wheat_original\\data\\data_split_811_full\\wheat_split_811_manifest.csv",
+  "output_dir": "D:\\2026.6.22\\wheat_original\\outputs\\vlm_comparison\\manifests",
+  "base_seed": 20260703,
+  "subsets": {
+    "vlm_connectivity_40.csv": {
+      "path": "D:\\2026.6.22\\wheat_original\\outputs\\vlm_comparison\\manifests\\vlm_connectivity_40.csv",
+      "total": 40,
+      "by_split": {
+        "val": 40
+      },
+      "by_stage_source": [
+        {
+          "stage_id": "flag_leaf_booting",
+          "source_type": "experiment_tong",
+          "count": 2
+        },
+        {
+          "stage_id": "flag_leaf_booting",
+          "source_type": "large_scale",
+          "count": 3
+        },
+        {
+          "stage_id": "flowering",
+          "source_type": "experiment_tong",
+          "count": 2
+        },
+        {
+          "stage_id": "flowering",
+          "source_type": "large_scale",
+          "count": 3
+        },
+        {
+          "stage_id": "grain_filling",
+          "source_type": "experiment_tong",
+          "count": 2
+        },
+        {
+          "stage_id": "grain_filling",
+          "source_type": "large_scale",
+          "count": 3
+        },
+        {
+          "stage_id": "heading",
+          "source_type": "experiment_tong",
+          "count": 2
+        },
+        {
+          "stage_id": "heading",
+          "source_type": "large_scale",
+          "count": 3
+        },
+        {
+          "stage_id": "maturity",
+          "source_type": "experiment_tong",
+          "count": 2
+        },
+        {
+          "stage_id": "maturity",
+          "source_type": "large_scale",
+          "count": 3
+        },
+        {
+          "stage_id": "seedling",
+          "source_type": "experiment_tong",
+          "count": 2
+        },
+        {
+          "stage_id": "seedling",
+          "source_type": "large_scale",
+          "count": 3
+        },
+        {
+          "stage_id": "stem_elongation",
+          "source_type": "experiment_tong",
+          "count": 2
+        },
+        {
+          "stage_id": "stem_elongation",
+          "source_type": "large_scale",
+          "count": 3
+        },
+        {
+          "stage_id": "tillering",
+          "source_type": "experiment_tong",
+          "count": 2
+        },
+        {
+          "stage_id": "tillering",
+          "source_type": "large_scale",
+          "count": 3
+        }
+      ]
+    },
+    "vlm_prompt_dev_400.csv": {
+      "path": "D:\\2026.6.22\\wheat_original\\outputs\\vlm_comparison\\manifests\\vlm_prompt_dev_400.csv",
+      "total": 400,
+      "by_split": {
+        "val": 400
+      },
+      "by_stage_source": [
+        {
+          "stage_id": "flag_leaf_booting",
+          "source_type": "experiment_tong",
+          "count": 14
+        },
+        {
+          "stage_id": "flag_leaf_booting",
+          "source_type": "large_scale",
+          "count": 36
+        },
+        {
+          "stage_id": "flowering",
+          "source_type": "experiment_tong",
+          "count": 22
+        },
+        {
+          "stage_id": "flowering",
+          "source_type": "large_scale",
+          "count": 28
+        },
+        {
+          "stage_id": "grain_filling",
+          "source_type": "experiment_tong",
+          "count": 30
+        },
+        {
+          "stage_id": "grain_filling",
+          "source_type": "large_scale",
+          "count": 20
+        },
+        {
+          "stage_id": "heading",
+          "source_type": "experiment_tong",
+          "count": 10
+        },
+        {
+          "stage_id": "heading",
+          "source_type": "large_scale",
+          "count": 40
+        },
+        {
+          "stage_id": "maturity",
+          "source_type": "experiment_tong",
+          "count": 12
+        },
+        {
+          "stage_id": "maturity",
+          "source_type": "large_scale",
+          "count": 38
+        },
+        {
+          "stage_id": "seedling",
+          "source_type": "experiment_tong",
+          "count": 6
+        },
+        {
+          "stage_id": "seedling",
+          "source_type": "large_scale",
+          "count": 44
+        },
+        {
+          "stage_id": "stem_elongation",
+          "source_type": "experiment_tong",
+          "count": 16
+        },
+        {
+          "stage_id": "stem_elongation",
+          "source_type": "large_scale",
+          "count": 34
+        },
+        {
+          "stage_id": "tillering",
+          "source_type": "experiment_tong",
+          "count": 6
+        },
+        {
+          "stage_id": "tillering",
+          "source_type": "large_scale",
+          "count": 44
+        }
+      ]
+    },
+    "vlm_prompt_dev_800.csv": {
+      "path": "D:\\2026.6.22\\wheat_original\\outputs\\vlm_comparison\\manifests\\vlm_prompt_dev_800.csv",
+      "total": 800,
+      "by_split": {
+        "val": 800
+      },
+      "by_stage_source": [
+        {
+          "stage_id": "flag_leaf_booting",
+          "source_type": "experiment_tong",
+          "count": 28
+        },
+        {
+          "stage_id": "flag_leaf_booting",
+          "source_type": "large_scale",
+          "count": 72
+        },
+        {
+          "stage_id": "flowering",
+          "source_type": "experiment_tong",
+          "count": 43
+        },
+        {
+          "stage_id": "flowering",
+          "source_type": "large_scale",
+          "count": 57
+        },
+        {
+          "stage_id": "grain_filling",
+          "source_type": "experiment_tong",
+          "count": 60
+        },
+        {
+          "stage_id": "grain_filling",
+          "source_type": "large_scale",
+          "count": 40
+        },
+        {
+          "stage_id": "heading",
+          "source_type": "experiment_tong",
+          "count": 21
+        },
+        {
+          "stage_id": "heading",
+          "source_type": "large_scale",
+          "count": 79
+        },
+        {
+          "stage_id": "maturity",
+          "source_type": "experiment_tong",
+          "count": 23
+        },
+        {
+          "stage_id": "maturity",
+          "source_type": "large_scale",
+          "count": 77
+        },
+        {
+          "stage_id": "seedling",
+          "source_type": "experiment_tong",
+          "count": 11
+        },
+        {
+          "stage_id": "seedling",
+          "source_type": "large_scale",
+          "count": 89
+        },
+        {
+          "stage_id": "stem_elongation",
+          "source_type": "experiment_tong",
+          "count": 33
+        },
+        {
+          "stage_id": "stem_elongation",
+          "source_type": "large_scale",
+          "count": 67
+        },
+        {
+          "stage_id": "tillering",
+          "source_type": "experiment_tong",
+          "count": 11
+        },
+        {
+          "stage_id": "tillering",
+          "source_type": "large_scale",
+          "count": 89
+        }
+      ]
+    },
+    "vlm_model_test_balanced_800.csv": {
+      "path": "D:\\2026.6.22\\wheat_original\\outputs\\vlm_comparison\\manifests\\vlm_model_test_balanced_800.csv",
+      "total": 800,
+      "by_split": {
+        "test": 800
+      },
+      "by_stage_source": [
+        {
+          "stage_id": "flag_leaf_booting",
+          "source_type": "experiment_tong",
+          "count": 28
+        },
+        {
+          "stage_id": "flag_leaf_booting",
+          "source_type": "large_scale",
+          "count": 72
+        },
+        {
+          "stage_id": "flowering",
+          "source_type": "experiment_tong",
+          "count": 43
+        },
+        {
+          "stage_id": "flowering",
+          "source_type": "large_scale",
+          "count": 57
+        },
+        {
+          "stage_id": "grain_filling",
+          "source_type": "experiment_tong",
+          "count": 60
+        },
+        {
+          "stage_id": "grain_filling",
+          "source_type": "large_scale",
+          "count": 40
+        },
+        {
+          "stage_id": "heading",
+          "source_type": "experiment_tong",
+          "count": 21
+        },
+        {
+          "stage_id": "heading",
+          "source_type": "large_scale",
+          "count": 79
+        },
+        {
+          "stage_id": "maturity",
+          "source_type": "experiment_tong",
+          "count": 23
+        },
+        {
+          "stage_id": "maturity",
+          "source_type": "large_scale",
+          "count": 77
+        },
+        {
+          "stage_id": "seedling",
+          "source_type": "experiment_tong",
+          "count": 11
+        },
+        {
+          "stage_id": "seedling",
+          "source_type": "large_scale",
+          "count": 89
+        },
+        {
+          "stage_id": "stem_elongation",
+          "source_type": "experiment_tong",
+          "count": 33
+        },
+        {
+          "stage_id": "stem_elongation",
+          "source_type": "large_scale",
+          "count": 67
+        },
+        {
+          "stage_id": "tillering",
+          "source_type": "experiment_tong",
+          "count": 11
+        },
+        {
+          "stage_id": "tillering",
+          "source_type": "large_scale",
+          "count": 89
+        }
+      ]
+    },
+    "vlm_model_test_full_2485.csv": {
+      "path": "D:\\2026.6.22\\wheat_original\\outputs\\vlm_comparison\\manifests\\vlm_model_test_full_2485.csv",
+      "total": 2485,
+      "by_split": {
+        "test": 2485
+      },
+      "by_stage_source": [
+        {
+          "stage_id": "flag_leaf_booting",
+          "source_type": "experiment_tong",
+          "count": 65
+        },
+        {
+          "stage_id": "flag_leaf_booting",
+          "source_type": "large_scale",
+          "count": 171
+        },
+        {
+          "stage_id": "flowering",
+          "source_type": "experiment_tong",
+          "count": 105
+        },
+        {
+          "stage_id": "flowering",
+          "source_type": "large_scale",
+          "count": 139
+        },
+        {
+          "stage_id": "grain_filling",
+          "source_type": "experiment_tong",
+          "count": 191
+        },
+        {
+          "stage_id": "grain_filling",
+          "source_type": "large_scale",
+          "count": 125
+        },
+        {
+          "stage_id": "heading",
+          "source_type": "experiment_tong",
+          "count": 83
+        },
+        {
+          "stage_id": "heading",
+          "source_type": "large_scale",
+          "count": 308
+        },
+        {
+          "stage_id": "maturity",
+          "source_type": "experiment_tong",
+          "count": 96
+        },
+        {
+          "stage_id": "maturity",
+          "source_type": "large_scale",
+          "count": 329
+        },
+        {
+          "stage_id": "seedling",
+          "source_type": "experiment_tong",
+          "count": 28
+        },
+        {
+          "stage_id": "seedling",
+          "source_type": "large_scale",
+          "count": 219
+        },
+        {
+          "stage_id": "stem_elongation",
+          "source_type": "experiment_tong",
+          "count": 70
+        },
+        {
+          "stage_id": "stem_elongation",
+          "source_type": "large_scale",
+          "count": 142
+        },
+        {
+          "stage_id": "tillering",
+          "source_type": "experiment_tong",
+          "count": 46
+        },
+        {
+          "stage_id": "tillering",
+          "source_type": "large_scale",
+          "count": 368
+        }
+      ]
+    }
+  }
+}
