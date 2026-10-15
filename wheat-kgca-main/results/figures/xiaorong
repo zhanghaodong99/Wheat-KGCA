@@ -1,9 +1,0 @@
-### Cumulative Ablation Study
-| Ablation Step | Setting | Accuracy | Macro‑F1 | Balanced Accuracy |
-| ---: | --- | ---: | ---: | ---: |
-| 1 | Visual Baseline (ConvNeXtV2‑Tiny + RCA) | 95.94±0.11% | 95.72±0.13% | 95.83±0.12% |
-| 2 | + Structured Semantic Features | 96.21±0.10% | 96.03±0.14% | 96.10±0.11% |
-| 3 | + Semantic‑Visual Cross‑Attention | 96.24±0.12% | 96.05±0.15% | 96.12±0.13% |
-| 4 | + Spatial Prior Bias | 96.24±0.11% | 96.05±0.13% | 96.12±0.12% |
-| 5 | + CAM‑Guided Auxiliary Loss | 96.84±0.13% | 96.68±0.14% | 96.75±0.14% |
-| 6 | + Bounded Gating Constraint (Full Model) | 96.98±0.12% | 96.81±0.15% | 96.87±0.13% |
